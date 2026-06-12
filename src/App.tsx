@@ -25,39 +25,17 @@ export default function App() {
     label: string;
   } | null>(null);
 
-  // Inicialização do tema base
+  // Sincroniza classe do tema dark no documento
   useEffect(() => {
-    const storedTheme = localStorage.getItem("tjsp-theme");
-    if (storedTheme === "dark") {
-      setDarkMode(true);
+    if (darkMode) {
       document.documentElement.classList.add("dark");
-    } else if (storedTheme === "light") {
-      setDarkMode(false);
-      document.documentElement.classList.remove("dark");
     } else {
-      // Padrão do sistema
-      const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      setDarkMode(systemPrefersDark);
-      if (systemPrefersDark) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+      document.documentElement.classList.remove("dark");
     }
-  }, [setDarkMode]);
+  }, [darkMode]);
 
   const toggleTheme = () => {
-    const nextDark = !darkMode;
-    setDarkMode(nextDark);
-    if (nextDark) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("tjsp-theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("tjsp-theme", "light");
-    }
+    setDarkMode(!darkMode);
   };
 
   // Exportar Backup JSON
@@ -84,6 +62,7 @@ export default function App() {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
+    const target = e.target;
     fileReader.readAsText(files[0], "UTF-8");
     fileReader.onload = (event) => {
       try {
@@ -96,6 +75,8 @@ export default function App() {
         }
       } catch {
         alert("Erro ao processar o arquivo JSON.");
+      } finally {
+        target.value = "";
       }
     };
   };

@@ -87,7 +87,10 @@ export const useFormStore = create<FormState>()(
       candidateName: "NOME DO CANDIDATO",
       checkedItems: {},
       notes: {},
-      darkMode: false,
+      darkMode:
+        typeof window !== "undefined" && window.matchMedia
+          ? window.matchMedia("(prefers-color-scheme: dark)").matches
+          : false,
 
       setCandidateName: (name) => set({ candidateName: name }),
 

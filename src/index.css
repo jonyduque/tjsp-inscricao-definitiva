@@ -534,7 +534,9 @@ body {
   .action-buttons-wrap,
   .item-action-icon-btn,
   .link-tooltip-trigger,
-  .accordion-arrow-icon {
+  .accordion-arrow-icon,
+  .notes-modal-overlay,
+  .link-tooltip-bubble {
     display: none !important;
   }
 

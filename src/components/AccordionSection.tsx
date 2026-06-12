@@ -111,17 +111,19 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({
         </div>
       </div>
 
-      {isOpen && (
-        <div className="accordion-content" id={`sect-content-${section.id}`}>
-          {section.items.map((item) => (
-            <FormItemComponent
-              key={item.id}
-              item={item}
-              onOpenNote={onOpenNote}
-            />
-          ))}
-        </div>
-      )}
+      <div
+        className="accordion-content"
+        id={`sect-content-${section.id}`}
+        style={{ display: isOpen ? "block" : "none" }}
+      >
+        {section.items.map((item) => (
+          <FormItemComponent
+            key={item.id}
+            item={item}
+            onOpenNote={onOpenNote}
+          />
+        ))}
+      </div>
     </div>
   );
 };
