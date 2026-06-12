@@ -1,18 +1,31 @@
 export interface DocumentLink {
+  /** The text label for the link. */
   text: string;
+  /** The URL destination. */
   url: string;
 }
 
 export interface DocumentItem {
+  /** Unique identifier for the item. */
   id: string;
+  /** The text label of the item. */
   label: string;
+  /** Helper text or instructions associated with the item. */
+  description?: string;
+  /** Links associated with this item. */
   links?: DocumentLink[];
+  /** Sub-items nested under this item. */
   subItems?: DocumentItem[];
 }
 
 export interface DocumentSection {
+  /** Unique identifier for the section. */
   id: string;
+  /** Title of the section. */
   title: string;
+  /** Optional helper text or subtitle for the section. */
+  description?: string;
+  /** Items within this section. */
   items: DocumentItem[];
 }
 
@@ -20,6 +33,7 @@ export const documentsStructure: DocumentSection[] = [
   {
     id: "documentos",
     title: "Documentos",
+    description: "Cópias autenticadas:",
     items: [
       { id: "doc-fotos", label: "2 fotos 3x4, iguais e recentes" },
       { id: "doc-diploma", label: "Diploma em Direito registrado pelo MEC" },
@@ -104,7 +118,7 @@ export const documentsStructure: DocumentSection[] = [
             label: "Federal (Cível e Criminal)",
             links: [
               {
-                text: "CJF Certidão Unificada",
+                text: "CJF-todos, exceto TRF6",
                 url: "https://certidao-unificada.cjf.jus.br/#/solicitacao-certidao",
               },
             ],
@@ -257,6 +271,8 @@ export const documentsStructure: DocumentSection[] = [
             id: "ativ-advocacia-atos",
             label:
               "Advocacia - participação anual mínima em 5 atos privativos de advogados em causas ou questões distintas",
+            description:
+              "Certidão de militância. Se for SAJ tem de pedir pessoalmente, por e-mail ou no balcão virtual",
             links: [
               { text: "TJSP-eproc", url: "https://certidoes.tjsp.jus.br/" },
             ],
@@ -269,7 +285,7 @@ export const documentsStructure: DocumentSection[] = [
               {
                 id: "ativ-cargos-certidao",
                 label:
-                  "Certidão circunstanciada do órgão competente (atribuições e prática de atos)",
+                  "Certidão circunstanciada do órgão competente (atribuições e a prática reiterada de atos que exijam a utilização preponderante de conhecimento jurídico)",
               },
             ],
           },
