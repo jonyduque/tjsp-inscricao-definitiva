@@ -18,3 +18,5 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+coverage/
+.vite/
