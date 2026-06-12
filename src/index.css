@@ -385,3 +385,216 @@ body {
 .link-tooltip-bubble a:hover {
   text-decoration: underline;
 }
+
+/* Layout Principal */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1.5rem;
+}
+
+.printable-card {
+  width: 100%;
+  max-width: 900px;
+  background-color: var(--bg-paper);
+  border: 1px solid var(--border-color);
+  border-top: 6px solid var(--primary-gold);
+  border-radius: 4px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  padding: 2.5rem;
+}
+
+/* Barra de Ferramentas */
+.toolbar-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.main-actions-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.toolbar-action-btn {
+  background-color: transparent;
+  border: 1px solid var(--primary-gold);
+  color: var(--primary-gold);
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.toolbar-action-btn:hover {
+  background-color: var(--primary-gold);
+  color: white;
+}
+
+.file-input-label {
+  cursor: pointer;
+}
+
+.reset-btn {
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+.reset-btn:hover {
+  background-color: #d9534f;
+  color: white;
+}
+
+.theme-toggle-round-btn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-round-btn:hover {
+  border-color: var(--primary-gold);
+  color: var(--primary-gold);
+}
+
+/* Header do Candidato */
+.candidate-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.editable-candidate-input {
+  background: transparent;
+  border: 1px dashed transparent;
+  font-family: "Georgia", serif;
+  font-size: 1.8rem;
+  color: var(--primary-gold);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  width: 90%;
+  max-width: 600px;
+  cursor: text;
+  transition: all 0.2s ease;
+}
+
+.editable-candidate-input:hover {
+  border-color: var(--primary-gold);
+  background-color: var(--bg-hover);
+}
+
+.editable-candidate-input:focus {
+  outline: none;
+  border-style: solid;
+  border-color: var(--primary-gold);
+  background-color: transparent;
+}
+
+/* Estilos de Impressão */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  .app-container {
+    padding: 0 !important;
+  }
+
+  .printable-card {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Oculta controles */
+  .toolbar-section,
+  .action-buttons-wrap,
+  .item-action-icon-btn,
+  .link-tooltip-trigger,
+  .accordion-arrow-icon {
+    display: none !important;
+  }
+
+  /* Garante Accordions expandidos */
+  .accordion-content {
+    display: block !important;
+    border-top: 1px solid #000 !important;
+    padding: 0.5rem 0 !important;
+  }
+
+  .accordion-section {
+    border: none !important;
+    border-bottom: 1px solid #000 !important;
+    border-radius: 0 !important;
+    margin-bottom: 1.5rem !important;
+    page-break-inside: avoid;
+  }
+
+  .accordion-header {
+    background: none !important;
+    padding: 0.5rem 0 !important;
+  }
+
+  .accordion-title {
+    color: black !important;
+    font-size: 14pt !important;
+    font-weight: bold !important;
+  }
+
+  /* Mantém árvore de recuo */
+  .sub-items-tree {
+    border-left: 1px solid #ccc !important;
+    padding-left: 1.2rem !important;
+  }
+
+  .form-item-row {
+    border-bottom: 1px solid #eee !important;
+    page-break-inside: avoid;
+  }
+
+  .form-item-row:hover {
+    background: none !important;
+  }
+
+  /* Estiliza checkboxes na impressão */
+  .item-checkbox-indicator {
+    border: 1px solid black !important;
+  }
+
+  .item-checkbox-indicator.checked {
+    background-color: black !important;
+  }
+
+  /* Mostra anotações na impressão */
+  .item-note-badge {
+    display: none !important;
+  }
+
+  /* Força quebra de página de seções longas se necessário */
+  .sections-container {
+    page-break-before: auto;
+  }
+}

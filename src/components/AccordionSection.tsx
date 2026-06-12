@@ -1,9 +1,38 @@
 import { ChevronDown, SquarePen } from "lucide-react";
 import type React from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import type { DocumentItem, DocumentSection } from "../data/documentsStructure";
 import { useFormStore } from "../store/formStore";
 import { FormItemComponent } from "./FormItemComponent";
+
+// Conta recursivamente os itens marcados
+const countChecked = (
+  items: DocumentItem[],
+  checkedItems: Record<string, boolean>,
+): number => {
+  let count = 0;
+  for (const item of items) {
+    if (checkedItems[item.id]) {
+      count++;
+    }
+    if (item.subItems) {
+      count += countChecked(item.subItems, checkedItems);
+    }
+  }
+  return count;
+};
+
+// Conta recursivamente o total de itens
+const countTotal = (items: DocumentItem[]): number => {
+  let count = 0;
+  for (const item of items) {
+    count++;
+    if (item.subItems) {
+      count += countTotal(item.subItems);
+    }
+  }
+  return count;
+};
 
 interface AccordionSectionProps {
   /** A seção do documento a ser exibida */
@@ -26,34 +55,11 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({
   const [isOpen, setIsOpen] = useState(true);
   const { checkedItems, notes } = useFormStore();
 
-  // Conta recursivamente os itens marcados
-  const countChecked = (items: DocumentItem[]): number => {
-    let count = 0;
-    for (const item of items) {
-      if (checkedItems[item.id]) {
-        count++;
-      }
-      if (item.subItems) {
-        count += countChecked(item.subItems);
-      }
-    }
-    return count;
-  };
-
-  // Conta recursivamente o total de itens
-  const countTotal = (items: DocumentItem[]): number => {
-    let count = 0;
-    for (const item of items) {
-      count++;
-      if (item.subItems) {
-        count += countTotal(item.subItems);
-      }
-    }
-    return count;
-  };
-
-  const total = countTotal(section.items);
-  const checked = countChecked(section.items);
+  const total = useMemo(() => countTotal(section.items), [section.items]);
+  const checked = useMemo(
+    () => countChecked(section.items, checkedItems),
+    [section.items, checkedItems],
+  );
   const hasSectionNote = !!notes[section.id];
 
   const handleToggle = () => {
