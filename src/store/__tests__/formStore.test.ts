@@ -51,14 +51,24 @@ describe("useFormStore", () => {
     expect(useFormStore.getState().checkedItems["cert-federal"]).toBe(false);
   });
 
-  it("deve salvar e remover anotações", () => {
+  it("deve salvar e remover anotações de itens e seções", () => {
     const store = useFormStore.getState();
+    // Teste com item
     store.setNote("doc-fotos", "Fotos retiradas em 10/06");
     expect(useFormStore.getState().notes["doc-fotos"]).toBe(
       "Fotos retiradas em 10/06",
     );
 
+    // Teste com seção
+    store.setNote("certidoes", "Faltando certidão de casamento");
+    expect(useFormStore.getState().notes.certidoes).toBe(
+      "Faltando certidão de casamento",
+    );
+
+    // Remoção de anotações
     store.setNote("doc-fotos", "");
     expect(useFormStore.getState().notes["doc-fotos"]).toBe(undefined);
+    store.setNote("certidoes", "   "); // deve remover se for apenas espaços
+    expect(useFormStore.getState().notes.certidoes).toBe(undefined);
   });
 });
