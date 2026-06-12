@@ -16,9 +16,9 @@ interface FormState {
   setNote: (id: string, note: string) => void;
   setDarkMode: (dark: boolean) => void;
   loadBackup: (data: {
-    candidateName: string;
-    checkedItems: Record<string, boolean>;
-    notes: Record<string, string>;
+    candidateName?: string;
+    checkedItems?: Record<string, boolean>;
+    notes?: Record<string, string>;
   }) => void;
   reset: () => void;
 }
@@ -121,8 +121,8 @@ export const useFormStore = create<FormState>()(
       loadBackup: (data) =>
         set({
           candidateName: data.candidateName || "NOME DO CANDIDATO",
-          checkedItems: data.checkedItems || {},
-          notes: data.notes || {},
+          checkedItems: data.checkedItems ? { ...data.checkedItems } : {},
+          notes: data.notes ? { ...data.notes } : {},
         }),
 
       reset: () =>
