@@ -143,3 +143,245 @@ body {
 .modal-btn.save:hover {
   background: var(--primary-gold-hover);
 }
+
+/* ==========================================================================
+   Accordion & Form Items Styles
+   ========================================================================== */
+
+/* Estilo Accordion */
+.accordion-section {
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  background-color: var(--bg-paper);
+  overflow: hidden;
+}
+
+.accordion-header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background-color: rgba(179, 142, 93, 0.02);
+  user-select: none;
+}
+
+.accordion-header:hover {
+  background-color: var(--bg-hover);
+}
+
+.accordion-title {
+  font-size: 1.15rem;
+  color: var(--primary-gold);
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.accordion-counter {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: system-ui, sans-serif;
+}
+
+.accordion-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.accordion-arrow-icon {
+  color: var(--primary-gold);
+  transition: transform 0.2s ease;
+}
+
+.accordion-section.collapsed .accordion-arrow-icon {
+  transform: rotate(-90deg);
+}
+
+.accordion-content {
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+}
+
+/* Árvore de Itens */
+.form-item-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem 0.5rem;
+  border-bottom: 1px solid rgba(179, 142, 93, 0.05);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.form-item-row:hover {
+  background-color: var(--bg-hover);
+}
+
+.item-checkbox-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.item-checkbox-indicator {
+  width: 17px;
+  height: 17px;
+  border: 1.5px solid var(--primary-gold);
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.item-checkbox-indicator.checked {
+  background-color: var(--primary-gold);
+}
+
+.checkbox-checkmark {
+  width: 3.5px;
+  height: 7px;
+  border: solid white;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg) translate(-0.5px, -0.5px);
+}
+
+.item-label-text {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+.form-item-row.item-checked .item-label-text {
+  text-decoration: line-through;
+  font-style: italic;
+  opacity: 0.55;
+}
+
+.action-buttons-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.item-action-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--primary-gold);
+  padding: 4px 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.item-action-icon-btn:hover {
+  opacity: 1;
+  background-color: rgba(179, 142, 93, 0.1);
+}
+
+.item-note-badge {
+  font-size: 0.7rem;
+  font-weight: bold;
+  background-color: rgba(179, 142, 93, 0.15);
+  color: var(--primary-gold);
+  padding: 1px 5px;
+  border-radius: 10px;
+  align-self: center;
+}
+
+.sub-items-tree {
+  padding-left: 1.5rem;
+  border-left: 1px dotted var(--primary-gold);
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Tooltip */
+.link-tooltip-container {
+  position: relative;
+  display: inline-block;
+}
+
+.link-tooltip-trigger {
+  background: rgba(179, 142, 93, 0.08);
+  border: 1px solid rgba(179, 142, 93, 0.25);
+  color: var(--primary-gold);
+  font-family: system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.link-tooltip-trigger:hover {
+  background-color: var(--primary-gold);
+  color: white;
+}
+
+.link-tooltip-bubble {
+  width: 220px;
+  background-color: var(--bg-paper);
+  border: 1px solid var(--primary-gold);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+}
+
+.link-tooltip-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--primary-gold) transparent transparent transparent;
+}
+
+.link-tooltip-bubble strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--primary-gold);
+}
+
+.link-tooltip-bubble a {
+  display: block;
+  color: var(--primary-gold);
+  text-decoration: none;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(179, 142, 93, 0.08);
+}
+
+.link-tooltip-bubble a:last-child {
+  border-bottom: none;
+}
+
+.link-tooltip-bubble a:hover {
+  text-decoration: underline;
+}
