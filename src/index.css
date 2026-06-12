@@ -29,8 +29,10 @@
 body {
   background-color: var(--bg-body);
   color: var(--text-primary);
-  font-family: 'Georgia', serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: "Georgia", serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 #root {
