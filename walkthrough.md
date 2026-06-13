@@ -1,6 +1,6 @@
 # Walkthrough de Implementação: Formulário de Inscrição Definitiva TJSP
 
-Este documento resume as tarefas concluídas, as alterações efetuadas, a cobertura de testes e os resultados de validação do formulário interativo de documentos para a Inscrição Definitiva no Tribunal de Justiça de São Paulo (TJSP).
+Este documento resume as tarefas concluídas, as alterações efetuadas, a cobertura de testes, os resultados de validação e os links de publicação do formulário interativo de documentos para a Inscrição Definitiva no Tribunal de Justiça de São Paulo (TJSP).
 
 ---
 
@@ -54,3 +54,13 @@ Executamos testes unitários para a lógica do store em [formStore.test.ts](file
 *   Os accordions colapsados são forçados a expandir para exibir todos os itens na folha física.
 *   As anotações do usuário são impressas logo abaixo de cada item em estilo menor e itálico.
 *   Os checkboxes usam bordas pretas de alto contraste para garantir visualização em preto e branco mesmo com background-graphics desativados.
+
+---
+
+## 3. Publicação e Deploy
+
+O projeto foi publicado com sucesso no GitHub e no Netlify:
+
+*   **Repositório GitHub:** [tjsp-inscricao-definitiva](https://github.com/jonyduque/tjsp-inscricao-definitiva)
+*   **URL de Produção Netlify:** [tjsp-inscricao-definitiva.netlify.app](https://tjsp-inscricao-definitiva.netlify.app)
+*   **Painel Admin Netlify:** [tjsp-inscricao-definitiva no Netlify](https://app.netlify.com/projects/tjsp-inscricao-definitiva)
