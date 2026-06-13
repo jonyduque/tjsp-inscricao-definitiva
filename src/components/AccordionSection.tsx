@@ -111,10 +111,14 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({
         </div>
       </div>
 
+      {hasSectionNote && (
+        <div className="print-only-note">Anotação Seção: {notes[section.id]}</div>
+      )}
+
       <div
         className="accordion-content"
         id={`sect-content-${section.id}`}
-        style={{ display: isOpen ? "block" : "none" }}
+        hidden={!isOpen}
       >
         {section.items.map((item) => (
           <FormItemComponent

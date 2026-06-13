@@ -138,6 +138,8 @@ export const FormItemComponent: React.FC<FormItemComponentProps> = ({
         </div>
       </div>
 
+      {hasNote && <div className="print-only-note">Anotação: {notes[item.id]}</div>}
+
       {item.subItems && item.subItems.length > 0 && (
         <div className="sub-items-tree">
           {item.subItems.map((subItem) => (

@@ -510,6 +510,14 @@ body {
   background-color: transparent;
 }
 
+.hidden-file-input {
+  display: none;
+}
+
+.print-only-note {
+  display: none;
+}
+
 /* Estilos de Impressão */
 @media print {
   body {
@@ -583,16 +591,35 @@ body {
 
   /* Estiliza checkboxes na impressão */
   .item-checkbox-indicator {
-    border: 1px solid black !important;
+    border: 1.5px solid black !important;
+    background-color: transparent !important;
   }
 
   .item-checkbox-indicator.checked {
     background-color: black !important;
   }
 
+  .checkbox-checkmark {
+    border-color: white !important;
+  }
+
   /* Mostra anotações na impressão */
   .item-note-badge {
     display: none !important;
+  }
+
+  .print-only-note {
+    display: block !important;
+    font-size: 0.85rem !important;
+    color: #333 !important;
+    margin-top: 0.25rem !important;
+    font-style: italic !important;
+    padding-left: 0.5rem !important;
+    border-left: 2px solid var(--primary-gold) !important;
+  }
+
+  [hidden] {
+    display: block !important;
   }
 
   /* Força quebra de página de seções longas se necessário */
