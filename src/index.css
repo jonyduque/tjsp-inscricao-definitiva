@@ -518,6 +518,105 @@ body {
   display: none;
 }
 
+/* Novos estilos para link de notas e expansão de subitens */
+.toolbar-right-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hide-checked-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.hide-checked-toggle:hover {
+  color: var(--text-primary);
+}
+
+.hide-checked-toggle input[type="checkbox"] {
+  accent-color: var(--primary-gold);
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+}
+
+.item-note-link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+  text-decoration: underline dotted;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  max-width: 220px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  transition: color 0.2s ease;
+}
+
+.item-note-link-btn:hover {
+  color: var(--primary-gold-hover);
+  text-decoration: underline;
+}
+
+.note-label-prefix {
+  font-weight: 600;
+  margin-right: 0.2rem;
+  color: var(--primary-gold);
+}
+
+.note-label-content {
+  font-style: italic;
+}
+
+.subitem-toggle-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  margin-right: 4px;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.subitem-toggle-btn:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.subitem-toggle-spacer {
+  width: 18px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Ocultação de itens checados e seções */
+.hide-checked-active .item-checked-state {
+  display: none !important;
+}
+
+.hide-checked-active .section-checked-state {
+  display: none !important;
+}
+
 /* Estilos de Impressão */
 @media print {
   body {
@@ -544,7 +643,9 @@ body {
   .link-tooltip-trigger,
   .accordion-arrow-icon,
   .notes-modal-overlay,
-  .link-tooltip-bubble {
+  .link-tooltip-bubble,
+  .subitem-toggle-btn,
+  .item-note-link-btn {
     display: none !important;
   }
 
@@ -560,7 +661,8 @@ body {
     border-bottom: 1px solid #000 !important;
     border-radius: 0 !important;
     margin-bottom: 1.5rem !important;
-    page-break-inside: avoid;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
 
   .accordion-header {
@@ -576,13 +678,16 @@ body {
 
   /* Mantém árvore de recuo */
   .sub-items-tree {
+    display: block !important;
     border-left: 1px solid #ccc !important;
     padding-left: 1.2rem !important;
   }
 
+  .form-item-container,
   .form-item-row {
     border-bottom: 1px solid #eee !important;
-    page-break-inside: avoid;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   .form-item-row:hover {

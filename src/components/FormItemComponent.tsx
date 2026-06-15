@@ -1,4 +1,4 @@
-import { HelpCircle, SquarePen } from "lucide-react";
+import { ChevronDown, ChevronRight, HelpCircle, SquarePen } from "lucide-react";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import type { DocumentItem } from "../data/documentsStructure";
@@ -27,10 +27,12 @@ export const FormItemComponent: React.FC<FormItemComponentProps> = ({
 }) => {
   const { checkedItems, notes, toggleItem } = useFormStore();
   const [showTooltip, setShowTooltip] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const tooltipRef = useRef<HTMLDivElement>(null);
 
   const isChecked = !!checkedItems[item.id];
   const hasNote = !!notes[item.id];
+  const hasSubItems = item.subItems && item.subItems.length > 0;
 
   const handleToggle = (e: React.MouseEvent) => {
     // Evita duplicar cliques se clicar em links ou botões de ação
@@ -66,7 +68,11 @@ export const FormItemComponent: React.FC<FormItemComponentProps> = ({
   }, []);
 
   return (
-    <div className={`form-item-container level-${level}`}>
+    <div
+      className={`form-item-container level-${level} ${
+        isChecked ? "item-checked-state" : ""
+      }`}
+    >
       {/* biome-ignore lint/a11y/useSemanticElements: custom checkbox row styling */}
       <div
         className={`form-item-row ${isChecked ? "item-checked" : ""} ${
@@ -79,13 +85,50 @@ export const FormItemComponent: React.FC<FormItemComponentProps> = ({
         tabIndex={0}
       >
         <div className="item-checkbox-wrapper">
+          {hasSubItems ? (
+            <button
+              type="button"
+              className="subitem-toggle-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsExpanded(!isExpanded);
+              }}
+              aria-label={
+                isExpanded ? "Colapsar subitens" : "Expandir subitens"
+              }
+              title={isExpanded ? "Colapsar" : "Expandir"}
+            >
+              {isExpanded ? (
+                <ChevronDown size={12} />
+              ) : (
+                <ChevronRight size={12} />
+              )}
+            </button>
+          ) : (
+            <div className="subitem-toggle-spacer" />
+          )}
+
           <div
             className={`item-checkbox-indicator ${isChecked ? "checked" : ""}`}
           >
             {isChecked && <div className="checkbox-checkmark" />}
           </div>
           <span className="item-label-text">{item.label}</span>
-          {hasNote && <span className="item-note-badge">Nota</span>}
+          {hasNote && (
+            <button
+              type="button"
+              className="item-note-link-btn font-sans"
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenNote(item.id, item.label);
+              }}
+              title={`Ver nota: ${notes[item.id]}`}
+              aria-label={`Visualizar anotação para ${item.label}`}
+            >
+              <span className="note-label-prefix">Nota: </span>
+              <span className="note-label-content">{notes[item.id]}</span>
+            </button>
+          )}
         </div>
 
         <div className="action-buttons-wrap">
@@ -138,10 +181,15 @@ export const FormItemComponent: React.FC<FormItemComponentProps> = ({
         </div>
       </div>
 
-      {hasNote && <div className="print-only-note">Anotação: {notes[item.id]}</div>}
+      {hasNote && (
+        <div className="print-only-note">Anotação: {notes[item.id]}</div>
+      )}
 
       {item.subItems && item.subItems.length > 0 && (
-        <div className="sub-items-tree">
+        <div
+          className="sub-items-tree"
+          style={{ display: isExpanded ? "block" : "none" }}
+        >
           {item.subItems.map((subItem) => (
             <FormItemComponent
               key={subItem.id}

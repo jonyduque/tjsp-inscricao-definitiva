@@ -16,6 +16,8 @@ export default function App() {
     notes,
     darkMode,
     setDarkMode,
+    hideCheckedItems,
+    setHideCheckedItems,
     loadBackup,
     reset,
   } = useFormStore();
@@ -84,7 +86,10 @@ export default function App() {
   return (
     <div className="app-container">
       {/* Container principal para o formulário */}
-      <div className="printable-card" id="printable-form">
+      <div
+        className={`printable-card ${hideCheckedItems ? "hide-checked-active" : ""}`}
+        id="printable-form"
+      >
         <div className="toolbar-section">
           <div className="main-actions-group">
             <button
@@ -131,14 +136,25 @@ export default function App() {
             </button>
           </div>
 
-          <button
-            type="button"
-            className="theme-toggle-round-btn"
-            onClick={toggleTheme}
-            title="Alternar Tema"
-          >
-            {darkMode ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
+          <div className="toolbar-right-group">
+            <label className="hide-checked-toggle">
+              <input
+                type="checkbox"
+                checked={hideCheckedItems}
+                onChange={(e) => setHideCheckedItems(e.target.checked)}
+              />
+              <span className="toggle-label font-sans">Ocultar Concluídos</span>
+            </label>
+
+            <button
+              type="button"
+              className="theme-toggle-round-btn"
+              onClick={toggleTheme}
+              title="Alternar Tema"
+            >
+              {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          </div>
         </div>
 
         <div className="candidate-header">

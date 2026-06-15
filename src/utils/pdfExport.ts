@@ -10,7 +10,16 @@ export const exportToPDF = (candidateName: string) => {
     document.documentElement.classList.remove("dark");
   }
 
-  const cleanName = candidateName.trim().replace(/[\/:*?"<>|]/g, "").trim() || "Candidato";
+  const hasHideChecked = element.classList.contains("hide-checked-active");
+  if (hasHideChecked) {
+    element.classList.remove("hide-checked-active");
+  }
+
+  const cleanName =
+    candidateName
+      .trim()
+      .replace(/[/:*?"<>|]/g, "")
+      .trim() || "Candidato";
 
   const opt = {
     margin: [15, 15, 15, 15],
@@ -20,9 +29,12 @@ export const exportToPDF = (candidateName: string) => {
     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
   };
 
-  const restoreDark = () => {
+  const restoreState = () => {
     if (isDark) {
       document.documentElement.classList.add("dark");
+    }
+    if (hasHideChecked) {
+      element.classList.add("hide-checked-active");
     }
   };
 
@@ -30,9 +42,9 @@ export const exportToPDF = (candidateName: string) => {
     .from(element)
     .set(opt)
     .save()
-    .then(restoreDark)
+    .then(restoreState)
     .catch((err: unknown) => {
-      restoreDark();
+      restoreState();
       console.error(err);
     });
 };

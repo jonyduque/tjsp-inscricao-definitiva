@@ -74,7 +74,11 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({
   };
 
   return (
-    <div className={`accordion-section ${isOpen ? "open" : "collapsed"}`}>
+    <div
+      className={`accordion-section ${isOpen ? "open" : "collapsed"} ${
+        checked === total && total > 0 ? "section-checked-state" : ""
+      }`}
+    >
       {/* biome-ignore lint/a11y/useSemanticElements: custom accordion header trigger */}
       <div
         className="accordion-header"
@@ -91,7 +95,19 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({
             ({checked}/{total})
           </span>
           {hasSectionNote && (
-            <span className="item-note-badge font-sans">Nota</span>
+            <button
+              type="button"
+              className="item-note-link-btn font-sans"
+              onClick={(e) => {
+                e.stopPropagation();
+                onOpenNote(section.id, `Seção ${section.title}`);
+              }}
+              title={`Ver nota: ${notes[section.id]}`}
+              aria-label={`Visualizar anotação da seção ${section.title}`}
+            >
+              <span className="note-label-prefix">Nota: </span>
+              <span className="note-label-content">{notes[section.id]}</span>
+            </button>
           )}
         </h3>
         <div className="accordion-controls">
@@ -112,7 +128,9 @@ export const AccordionSection: React.FC<AccordionSectionProps> = ({
       </div>
 
       {hasSectionNote && (
-        <div className="print-only-note">Anotação Seção: {notes[section.id]}</div>
+        <div className="print-only-note">
+          Anotação Seção: {notes[section.id]}
+        </div>
       )}
 
       <div

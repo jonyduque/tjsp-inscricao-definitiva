@@ -10,11 +10,13 @@ interface FormState {
   checkedItems: Record<string, boolean>;
   notes: Record<string, string>;
   darkMode: boolean;
+  hideCheckedItems: boolean;
 
   setCandidateName: (name: string) => void;
   toggleItem: (id: string) => void;
   setNote: (id: string, note: string) => void;
   setDarkMode: (dark: boolean) => void;
+  setHideCheckedItems: (hide: boolean) => void;
   loadBackup: (data: {
     candidateName?: string;
     checkedItems?: Record<string, boolean>;
@@ -91,8 +93,10 @@ export const useFormStore = create<FormState>()(
         typeof window !== "undefined" && window.matchMedia
           ? window.matchMedia("(prefers-color-scheme: dark)").matches
           : false,
+      hideCheckedItems: false,
 
       setCandidateName: (name) => set({ candidateName: name }),
+      setHideCheckedItems: (hide) => set({ hideCheckedItems: hide }),
 
       toggleItem: (id) =>
         set((state) => {
